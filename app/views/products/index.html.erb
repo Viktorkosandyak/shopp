@@ -18,9 +18,13 @@
           <td class="col-md-2"><%= product.user.try(:email) %></td>
       	  <td class="col-md-4">
             <%= link_to 'Show', product_path(product), class: "btn btn-info" %>
-            <%= link_to 'Edit', edit_product_path(product), class: "btn  btn-warning" %>
-            <%= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-      	  </td>
+            <% if can? :update, product %>
+              <%= link_to 'Edit', edit_product_path(product), class: "btn  btn-warning" %>
+            <% end %>
+            <% if can? :destroy, product %>
+              <%= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            <% end %>
+            </td>
     	</tr>
       <% end %>
     </tbody>
@@ -28,3 +32,4 @@
 </div>
 <br>
 <%= link_to 'New Product', new_product_path, class: "btn btn-primary" %>
+

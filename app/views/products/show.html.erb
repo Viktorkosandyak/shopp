@@ -11,5 +11,7 @@
   	$<%= @product.price %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product), class: "btn btn-warning" %>
+<% if can? :update, @product %>
+  <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-warning" %>
+<% end %>
 <%= link_to "Back", products_path, class: "btn btn-default" %>
